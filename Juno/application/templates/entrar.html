@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Entrar{% endblock %}
+{% block specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/entrar.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="content">
+        <div>
+            <div class="entrar">Entrar</div>
+            <div class="login-box">
+                <form autocomplete="off" action="/entrar" method="POST">
+                    <div class="username-section">
+                        <div class="tag">
+                            Nome de Usuario
+                        </div>
+                        <input value="{{ username }}" name="username" id="username" class="inp" spellcheck="false">
+                        <div class="error">
+                            {{ erro1 }}
+                        </div>
+                    </div>
+                    <div class="password-section">
+                        <div class="tag">
+                            Senha
+                        </div>
+                        <input value="{{ senha }}" name="senha" id="senha" class="inp password" spellcheck="false" type="password">
+                        <div class="error">
+                            {{ erro2 }}
+                        </div>
+                    </div>
+                    <div class="btn-section">
+                        <div class="btn-box-entrar">
+                            <button class="btn-entrar btn-type-1">Entrar</button>
+                            
+                        </div>
+                        <div class="error">
+                            {{ erro }}
+                        </div>
+                    </div>
+                        
+                </form>
+                <div class="registrar">
+                    Primeira vez aqui? <a class="link" href="{{url_for('views.criar_conta')}}">Criar uma conta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

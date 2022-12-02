@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Consultas{% endblock %}
+{% block specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/consultas.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="content">
+        
+        <div class="side-bar">
+            <div class="historico">Historico</div>
+            <div class="row-wrapper">
+                <div class="new-row-wrap">
+                    
+                    <input name="ano" spellcheck="false" id="new-row" class="new-row" value="Nova Consulta" onclick="f()">
+                    <button onclick="consultar()" id="search" class="search"><img src="../static/icons/next.png"></button>
+                    
+                </div>
+                    
+                {% for i in range(anos|length): %}
+                    {% if anos[i] == ano %}
+                        <div class="row selected" id="row-{{ i }}"><a style="color: #F3F7F7;" href="{{ url_for('views.consultas', ano=anos[i]) }}"><span>{{anos[i]}}</span><span>{{criacoes[i]}}</span></a></div>
+                    {% else %}
+                        <div class="row" id="row-{{ i }}"><a href="{{ url_for('views.consultas', ano=anos[i]) }}"><span>{{anos[i]}}</span><span>{{criacoes[i]}}</span></a></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="res">
+            {% if status == 0 %}
+                <div class="menssagem">
+                    Faca uma nova consulta
+                </div> 
+            {% elif status == 1 %}
+                <div class="display pop">{{ ano }}</div>
+                <div class="display img"><img class="pic" src="../static/imgs/{{ img }}"></div>
+                <div class="display txt">Em <span class="enfase">{{ ano }}</span> o a populacao brasileira sera de <span class="enfase">{{ populacao }}</span>, crescendo a uma taxa de <span class="enfase">0.7%</span> ao ano.</div>
+            {% else %}
+                <div class="menssagem">
+                    {{ erro }}
+                </div> 
+                
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        const input = document.getElementById("new-row");
+        const button = document.getElementById("search");
+        
+
+        function show(){
+            input.value = Math.floor(Math.random() * (2100 - 2023 + 1) + 2023);
+            
+            button.setAttribute("style", "display: flex; justify-content: center; align-items: center;");
+            
+            
+            input.setAttribute("style", "border-radius: 5px 0 0 5px; text-align: left; cursor: auto;");
+            input.select();
+        }
+
+        function hide(){
+            button.setAttribute("style", "display: none;");
+            input.setAttribute("style", "border-radius: 5px;");
+            input.setAttribute("style", "text-align: center;");
+            input.value = "Nova Consulta";
+        }
+
+        function consultar(){
+            let consulta = document.getElementById("new-row").value;
+            let url = window.location.href;
+            let index = url.indexOf("consultas");
+            let target = url.substring(0, index+9);
+            window.location.href = `${target}/${consulta}`;
+        }
+
+
+
+        input.addEventListener('change', (e) => {
+            if (input.value == ""){
+                hide();
+            }
+        });
+
+        function f(){
+            if (input.value == "Nova Consulta"){
+                show();
+                
+
+                // input.setAttribute("style", "border: solid red thin;");
+            }
+                
+        }
+    </script>
+{% endblock %}

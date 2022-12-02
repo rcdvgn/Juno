@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Saber Mais{% endblock %}
+{% block specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/saber_mais.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="content">
+        <p>Juno é uma aplicação desenvolvida a partir do micro-framework Flask e tem como objetivo modelar a curva de crescimento da população brasileira.</p>
+        <p>Para que isso fosse possível, adotamos 0.7% como a taxa de crescimento populacional brasileiro baseado nas últimas pesquisas, e 214 milhões como a população inicial brasileira.</p>
+        <p>Para modelar tal crescimento, são gerados valores baseados em equações diferenciais para cada ano até o ano alvo. Esse processo é exposto através da representação gráfica da curva, sendo ela exponencial.</p>
+        <p>Isso ocorre pelo fato de a população se multiplicar, logo, quanto maior ela for, mais acentuado será o crescimento.</p>
+    </div>
+{% endblock %}

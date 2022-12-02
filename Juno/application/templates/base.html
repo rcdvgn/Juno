@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block specific_css %}{% endblock %}
+</head>
+<body>
+    <div class="head">
+        <div class="logo">
+            <a href="{{url_for('views.consultas')}}">Juno</a>
+            
+        </div>
+        <div class="nav">
+            {% if session.username: %}
+                <a class="nav-item" href="{{url_for('views.saber_mais')}}">Saber Mais</a>
+                <a class="nav-item" href="{{url_for('views.consultas')}}">Consultas</a>
+                
+                <a class="nav-item" href="{{url_for('views.sair')}}"><img src="../static/icons/logout.png"></a>
+            
+            {% else %}
+                <a class="nav-item" href="{{url_for('views.saber_mais')}}">Saber Mais</a>
+                <span class="login nav-item">
+                    <a href="{{url_for('views.entrar')}}">Entrar</a>
+                    <span>/</span>
+                    <a href="{{url_for('views.criar_conta')}}">Criar Conta</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="body">
+        {% block body %}{% endblock %}
+    </div>
+    <!-- <div class="footer"></div> -->
+</body>
+</html>

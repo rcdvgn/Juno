@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Criar Conta{% endblock %}
+{% block specific_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/criar_conta.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="content">
+        <div>
+            <div class="registrar">Criar Conta</div>
+            <div class="register-box">
+                <form autocomplete="off" action="/criar-conta" method="POST"> 
+                    <div class="email-section">
+                        <div class="tag">
+                            E-mail
+                        </div>
+                        <input value="{{ email }}" name="email" id="email" class="inp" spellcheck="false" type="email">
+                        <div class="error">
+                            {{ erro1 }}
+                        </div>
+                    </div>
+                    <div class="username-section">
+                        <div class="tag">
+                            Nome de Usuario
+                        </div>
+                        <input value="{{ username }}" name="username" id="username" class="inp" spellcheck="false">
+                        <div class="error">
+                            {{ erro2 }}
+                        </div>
+                    </div>
+                    <div class="password-section">
+                        <div class="tag">
+                            Senha
+                        </div>
+                        <input value="{{ senha }}" name="senha" id="senha" class="inp password" spellcheck="false" type="password">
+                        <div class="error">
+                            {{ erro3 }}
+                        </div>
+                    </div>
+                    <div class="btn-section">
+                        <div class="btn-box-registrar">
+                            <button type="submit" class="btn-registrar btn-type-1">Criar Conta</button>
+                            
+                        </div>
+                        <div class="error">
+                            {{ erro }}
+                        </div>
+                    </div>
+                        
+                        
+                </form>
+                <div class="entrar">
+                    Ja esteve aqui? <a class="link" href="{{url_for('views.entrar')}}">Fazer Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
